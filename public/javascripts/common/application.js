@@ -111,6 +111,10 @@ $(function() {
   });
 });
 
+function escape_regexp(text) {
+  return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+}
+
 function create_autocomplete (obj) {
   if (obj.data("autocomplete-source") == "/value_lists") {
     obj.autocomplete({
@@ -124,6 +128,12 @@ function create_autocomplete (obj) {
             response(data);
           }
         });
+      },
+      change: function(event, ui){
+        var match = $(".ui-autocomplete li").text().toLowerCase().match("^" + escape_regexp($(this).val()) + "$");
+        if (!(match)){
+          $(this).val('');
+        };
       },
       minLength: 2
     });
@@ -149,7 +159,7 @@ function autocomplete_source_for_format_type(type) {
 
 // Autocomplete for Edit Form
 $(function() { 
-  $(".pbcore-autocomplete").live("keydown.autocomplete", function() {
+  $(".pbcore-autocomplete, .pbcore-conditional-autocomplete").live("keydown.autocomplete", function() {
     if (!$(this).hasClass('ui-autocomplete-input')) {
       create_autocomplete($(this));
     }
