@@ -9,7 +9,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120214070449) do
+ActiveRecord::Schema.define(:version => 20120325210855) do
+
+  create_table "annotation_types", :force => true do |t|
+    t.string   "name"
+    t.boolean  "visible",    :default => true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "annotations", :force => true do |t|
     t.integer "container_id"
@@ -49,7 +56,6 @@ ActiveRecord::Schema.define(:version => 20120214070449) do
     t.string   "attachment"
   end
 
-  add_index "assets", ["id"], :name => "index_id"
   add_index "assets", ["uuid"], :name => "index_assets_on_uuid", :unique => true
 
   create_table "assets_audience_levels", :id => false, :force => true do |t|
@@ -256,15 +262,6 @@ ActiveRecord::Schema.define(:version => 20120214070449) do
 
   add_index "essence_tracks", ["instantiation_id"], :name => "index_essence_tracks_on_instantiation_id"
 
-  create_table "exports", :force => true do |t|
-    t.string   "status"
-    t.string   "file"
-    t.integer  "creator_id"
-    t.integer  "updater_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "extension_names", :force => true do |t|
     t.string   "extension_key"
     t.string   "extension_authority"
@@ -465,14 +462,6 @@ ActiveRecord::Schema.define(:version => 20120214070449) do
   end
 
   add_index "ip_blocks", ["name"], :name => "index_ip_blocks_on_name", :unique => true
-
-  create_table "pbcore_importers", :force => true do |t|
-    t.string   "file"
-    t.integer  "number_of_records"
-    t.integer  "number_of_records_processed"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "publisher_roles", :force => true do |t|
     t.string  "name",                       :null => false
