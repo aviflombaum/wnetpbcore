@@ -11,3 +11,7 @@
             %th= name
             - instantiation.essence_tracks.each do |track|
               %td= auto_link(h(track.send(sym)).gsub(/\r\n|\r|\n/, "<br />"))
+      %tr{:class=>cycle('even','odd')}
+        %th Annotations
+        - instantiation.essence_tracks.each do |track|
+          %td= track.annotations.collect{|a| a.annotation}.join("\n")

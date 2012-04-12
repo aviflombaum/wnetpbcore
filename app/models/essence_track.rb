@@ -10,7 +10,7 @@ class EssenceTrack < ActiveRecord::Base
   accepts_nested_attributes_for :essence_track_identifiers, :allow_destroy => :true
   accepts_nested_attributes_for :annotations, :allow_destroy => :true
 
-  DISPLAY_FIELDS = ["Identifier", "Standard", "Encoding", "Data Rate", "Time Start", "Duration", "Bit Depth", "Sampling Rate", "Frame Size", "Aspect Ratio", "Frame Rate", "Language", "Annotation"].map{|f| [f, ("" + f.gsub(' ', '').underscore).to_sym]}.freeze
+  DISPLAY_FIELDS = ["Identifier", "Standard", "Encoding", "Data Rate", "Time Start", "Duration", "Bit Depth", "Sampling Rate", "Frame Size", "Aspect Ratio", "Frame Rate", "Language"].map{|f| [f, ("" + f.gsub(' ', '').underscore).to_sym]}.freeze
   
   xml_string "essenceTrackType"
   xml_subelements "essenceTrackIdentifier", :essence_track_identifiers
